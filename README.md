@@ -16,11 +16,18 @@ The pipeline identifies clinically meaningful symptom clusters without using dis
 ```
 ├── dataset.csv                                    ← Raw input dataset (Kaggle)
 │
-├── Notebook_1_Data_Understanding_Preprocessing.ipynb
-├── Notebook_2_Feature_Engineering_Modelling.ipynb
-├── Notebook_3_Visualization_Analysis.ipynb
-├── Notebook_4_Medical_Interpretation.ipynb
-├── Notebook_5_Ethics_Limitations.ipynb
+├──Notebooks
+│      ├── Notebook_1_Data_Understanding_Preprocessing.ipynb
+│      ├── Notebook_2_Feature_Engineering_Modelling.ipynb
+│      ├── Notebook_3_Visualization_Analysis.ipynb
+│      ├── Notebook_4_Medical_Interpretation.ipynb
+│      └── Notebook_5_Ethics_Limitations.ipynb
+│
+├──Result_NB1
+├──Result_NB2
+├──Result_NB3
+├──Result_NB4
+├──Result_NB5
 │
 ├── Healthcare_Symptom_Pattern_Discovery.pptx     ← Presentation slides
 └── README.md
@@ -59,9 +66,9 @@ The pipeline identifies clinically meaningful symptom clusters without using dis
 
 - Loads binary matrix from Notebook 1
 - Engineers 6 clinical aggregate features: `symptom_count`, `fever_flag`, `gi_score`, `resp_score`, `skin_score`, `pain_score`
-- Applies `StandardScaler` + `PCA` (retaining ≥ 80% variance)
+- Applies `StandardScaler` + `PCA` (retaining ≥ 89% variance)
 - Computes Ward linkage matrix and plots truncated dendrogram
-- Evaluates Silhouette Score and Davies-Bouldin Index for k=2..12
+- Evaluates Silhouette Score and Davies-Bouldin Index for k=2..41
 - Fits **Hierarchical Clustering (Ward)** and **Gaussian Mixture Model (GMM)** at optimal k
 - Reports Adjusted Rand Index against disease labels (post-hoc only)
 - **Outputs:** `task2_clustered.csv`
@@ -102,7 +109,7 @@ The pipeline identifies clinically meaningful symptom clusters without using dis
 **Task:** Discuss limitations of unsupervised health analysis
 
 - Loads interpreted data from Notebook 4
-- Full pipeline summary dashboard (5-panel figure)
+- Full pipeline summary dashboard (4-panel figure)
 - Structured documentation of **7 ethical considerations**
 - Structured documentation of **9 technical & clinical limitations**
 - **5 societal benefits** identified
@@ -172,8 +179,8 @@ The dataset is placed as `dataset.csv` in the root of the repository.
 | Model | Library | Configuration |
 |-------|---------|---------------|
 | Hierarchical Clustering | `scipy.cluster.hierarchy` | Ward linkage, Euclidean distance |
-| Gaussian Mixture Model | `sklearn.mixture.GaussianMixture` | Full covariance, 5 initialisations |
-| PCA | `sklearn.decomposition.PCA` | 80% variance threshold |
+| Gaussian Mixture Model | `sklearn.mixture.GaussianMixture` | Diag covariance, 5 initialisations |
+| PCA | `sklearn.decomposition.PCA` | 89% variance threshold |
 | t-SNE | `sklearn.manifold.TSNE` | perplexity=40, max_iter=1000 |
 
 ---
@@ -186,7 +193,7 @@ Each notebook saves figures automatically to the working directory:
 |----------|---------|
 | 1 | `task1_disease_distribution.png`, `task1_symptom_frequency.png`, `task1_cooccurrence_heatmap.png` |
 | 2 | `task2_pca_variance.png`, `task2_dendrogram.png`, `task2_cluster_metrics.png` |
-| 3 | `task3_pca_scatter.png`, `task3_tsne_scatter.png`, `task3_cluster_symptom_heatmap.png`, `task3_silhouette_plot.png`, `task3_cluster_composition.png`, `task3_gmm_confidence.png` |
+| 3 | `task3_pca_scatter.png`, `task3_tsne_scatter.png`, `task3_cluster_symptom_heatmap.png`, `task3_silhouette_plot.png`, `task3_cluster_composition.png` |
 | 4 | `task4_risk_bubble_chart.png`, `task4_radar_charts.png` |
 | 5 | `task5_pipeline_summary.png`, `task5_ethics_limitations.png` |
 
@@ -194,13 +201,13 @@ Each notebook saves figures automatically to the working directory:
 
 ## Assignment Mapping
 
-| Task | Notebook | Marks |
-|------|----------|-------|
-| Encode symptom presence effectively | Notebook 1 | Data Understanding (5) |
-| Cluster patient symptom profiles | Notebook 2 | Unsupervised Analysis (5) |
-| Visualise symptom clusters | Notebook 3 | Unsupervised Analysis (5) |
-| Interpret potential health risk groupings | Notebook 4 | Medical Interpretation (5) |
-| Discuss limitations of unsupervised health analysis | Notebook 5 | Reporting (15) |
+| Task | Notebook |
+|------|----------|
+| Encode symptom presence effectively | Notebook 1 |
+| Cluster patient symptom profiles | Notebook 2 |
+| Visualise symptom clusters | Notebook 3 |
+| Interpret potential health risk groupings | Notebook 4 |
+| Discuss limitations of unsupervised health analysis | Notebook 5 |
 
 ---
 
